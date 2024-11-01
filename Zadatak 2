@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+#define MAX_STRING 101
+
+int main() {
+    char str[MAX_STRING], cleaned[MAX_STRING];
+    int j = 0;
+
+    printf("Unesite string: ");
+    fgets(str, MAX_STRING, stdin);
+
+    
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (isalpha(str[i])) {
+            cleaned[j++] = tolower(str[i]);
+        }
+    }
+    cleaned[j] = '\0';  // Zatvaramo "očišćeni" string
+
+    
+    int duzina = strlen(cleaned);
+    int palindrom = 1;
+    for (int i = 0; i < duzina / 2; i++) {
+        if (cleaned[i] != cleaned[duzina - 1 - i]) {
+            palindrom = 0;
+            break;
+        }
+    }
+
+    if (palindrom) {
+        printf("Uneti string je palindrom.\n");
+    } else {
+        printf("Uneti string nije palindrom.\n");
+    }
+
+    return 0;
+}
