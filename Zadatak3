@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_STRING 101
+
+int main() {
+    char str[MAX_STRING];
+    char karakter;
+    int brojac = 0;
+
+    printf("Unesite string: ");
+    fgets(str, MAX_STRING, stdin);
+    
+    printf("Unesite karakter: ");
+    scanf("%c", &karakter);
+
+    // Brojanje pojavljivanja karaktera u stringu
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] == karakter) {
+            brojac++;
+        }
+    }
+
+    printf("Broj pojavljivanja karaktera '%c' u stringu je: %d\n", karakter, brojac);
+
+    return 0;
+}
