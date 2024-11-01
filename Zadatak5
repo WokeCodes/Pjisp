@@ -8,19 +8,16 @@ int main() {
 
     printf("Unesite prvi string: ");
     fgets(str1, MAX_STRING, stdin);
-    // Uklanjamo novi red ako postoji
     if (str1[strlen(str1) - 1] == '\n') {
         str1[strlen(str1) - 1] = '\0';
     }
 
     printf("Unesite drugi string: ");
     fgets(str2, MAX_STRING, stdin);
-    // Uklanjamo novi red ako postoji
     if (str2[strlen(str2) - 1] == '\n') {
         str2[strlen(str2) - 1] = '\0';
     }
 
-    // Poređenje stringova
     if (strcmp(str1, str2) == 0) {
         printf("Uneti stringovi su isti.\n");
     } else {
