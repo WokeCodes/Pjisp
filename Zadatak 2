@@ -17,7 +17,7 @@ int main() {
             cleaned[j++] = tolower(str[i]);
         }
     }
-    cleaned[j] = '\0';  // Zatvaramo "očišćeni" string
+    cleaned[j] = '\0';  
 
     
     int duzina = strlen(cleaned);
