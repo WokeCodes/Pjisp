@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_SIZE 30
+#define MAX_NAME 50
+
+struct kategorija_st {
+    char ime[MAX_NAME];
+    int broj_gledalaca;
+};
+
+void unos_kategorija(struct kategorija_st *kategorije, int *n);
+void sortiraj_kategorije(struct kategorija_st *kategorije, int n);
+void ispis_kategorija(struct kategorija_st *kategorije, int n);
+
+int main() {
+    struct kategorija_st kategorije[MAX_SIZE];
+    int n;
+
+    unos_kategorija(kategorije, &n);
+    sortiraj_kategorije(kategorije, n);
+
+    printf("\nKategorije sortirane po broju gledalaca:\n");
+    ispis_kategorija(kategorije, n);
+
+    return 0;
+}
+
+void unos_kategorija(struct kategorija_st *kategorije, int *n) {
+    int i;
+
+    do {
+        printf("Unesite broj kategorija (1-%d): ", MAX_SIZE);
+        scanf("%d", n);
+    } while (*n <= 0 || *n > MAX_SIZE);
+
+    for (i = 0; i < *n; i++) {
+        printf("Unesite ime kategorije [%d]: ", i + 1);
+        scanf(" %[^\n]", kategorije[i].ime); // Unos stringa sa razmacima
+        printf("Unesite broj gledalaca za kategoriju [%d]: ", i + 1);
+        scanf("%d", &kategorije[i].broj_gledalaca);
+    }
+}
+
+void sortiraj_kategorije(struct kategorija_st *kategorije, int n) {
+    int i, j;
+    struct kategorija_st temp;
+
+    for (i = 0; i < n - 1; i++) {
+        for (j = i + 1; j < n; j++) {
+            if (kategorije[i].broj_gledalaca < kategorije[j].broj_gledalaca) {
+                temp = kategorije[i];
+                kategorije[i] = kategorije[j];
+                kategorije[j] = temp;
+            }
+        }
+    }
+}
+
+void ispis_kategorija(struct kategorija_st *kategorije, int n) {
+    int i;
+
+    for (i = 0; i < n; i++) {
+        printf("%s: %d gledalaca\n", kategorije[i].ime, kategorije[i].broj_gledalaca);
+    }
+}
