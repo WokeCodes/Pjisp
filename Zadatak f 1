@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include <math.h>
+
+#define MAX_SIZE 30
+
+struct tacka_st {
+    double x;
+    double y;
+};
+
+void unos_tacaka(struct tacka_st *t, int *pn);
+void ispis_tacaka(struct tacka_st *t, int n);
+struct tacka_st najbliza_pocetku(struct tacka_st *t, int n);
+
+int main() {
+    struct tacka_st tacke[MAX_SIZE];
+    int n;
+
+    unos_tacaka(tacke, &n);
+    printf("\nUnete tačke:\n");
+    ispis_tacaka(tacke, n);
+
+    struct tacka_st najbliza = najbliza_pocetku(tacke, n);
+    printf("\nNajbliža tačka koordinatnom početku je: (%.2lf, %.2lf)\n", najbliza.x, najbliza.y);
+
+    return 0;
+}
+
+void unos_tacaka(struct tacka_st *t, int *pn) {
+    int i;
+
+    do {
+        printf("Unesite broj tačaka (1-%d): ", MAX_SIZE);
+        scanf("%d", pn);
+    } while (*pn <= 0 || *pn > MAX_SIZE);
+
+    for (i = 0; i < *pn; i++) {
+        printf("t[%d] = ", i);
+        scanf("%lf %lf", &t[i].x, &t[i].y);
+    }
+}
+
+void ispis_tacaka(struct tacka_st *t, int n) {
+    int i;
+
+    printf("[");
+    for (i = 0; i < n; i++) {
+        if (i > 0) {
+            printf(", ");
+        }
+        printf("(%.2lf, %.2lf)", t[i].x, t[i].y);
+    }
+    printf("]\n");
+}
+
+struct tacka_st najbliza_pocetku(struct tacka_st *t, int n) {
+    int i;
+    struct tacka_st najbliza = t[0];
+    double min_dist = sqrt(t[0].x * t[0].x + t[0].y * t[0].y);
+
+    for (i = 1; i < n; i++) {
+        double dist = sqrt(t[i].x * t[i].x + t[i].y * t[i].y);
+        if (dist < min_dist) {
+            min_dist = dist;
+            najbliza = t[i];
+        }
+    }
+
+    return najbliza;
+}
