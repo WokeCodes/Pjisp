@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <string.h>
+
+int main(int argc, char *argv[]) {
+    if (argc != 3) {
+        printf("Korišćenje: %s -opcija rec\n", argv[0]);
+        return 1;
+    }
+
+    char opcija = argv[1][1]; // Dohvatanje opcije nakon crtice
+    char *argument = argv[2];
+    char unos[100];
+
+    printf("Unesite reč: ");
+    scanf("%s", unos);
+
+    if (opcija == 's') {
+        printf("Spojeni string: %s %s\n", argument, unos);
+    } else if (opcija == 'p') {
+        if (strcmp(argument, unos) == 0) {
+            printf("Reči su iste.\n");
+        } else {
+            printf("Reči su različite.\n");
+        }
+    } else if (opcija == 'n') {
+        if (strstr(unos, argument) != NULL) {
+            printf("Argument '%s' se nalazi u unetoj reči '%s'.\n", argument, unos);
+        } else {
+            printf("Argument '%s' se ne nalazi u unetoj reči '%s'.\n", argument, unos);
+        }
+    } else {
+        printf("Nepoznata opcija: %s\n", argv[1]);
+        return 1;
+    }
+
+    return 0;
+}
